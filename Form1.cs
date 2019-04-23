@@ -18,10 +18,21 @@ namespace meaButton
         }
         private void Button_c(object sender, EventArgs e)
         {
-            Console.WriteLine(Application.StartupPath+"\\"+(sender as Button).Text+".mp3");
+            Console.WriteLine(Application.StartupPath+"\\"+(sender as Button).Tag);
             clsMCI cm = new clsMCI();
-            cm.FileName = Application.StartupPath + "\\" + (sender as Button).Text + ".mp3";
+            cm.FileName = Application.StartupPath + "\\" + (sender as Button).Tag;
             cm.play();
+        }
+        private void Button_dir(object sender, EventArgs e)
+        {
+            Console.WriteLine((sender as Button).Tag);
+            OpenFolder(Application.StartupPath + (sender as Button).Tag);
+        }
+        private void OpenFolder(String Path)
+        {
+            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo("Explorer.exe");
+            psi.Arguments = "/e," + Path;
+            System.Diagnostics.Process.Start(psi);
         }
     }
 }
