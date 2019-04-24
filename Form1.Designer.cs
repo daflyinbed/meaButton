@@ -57,6 +57,7 @@ namespace meaButton
             b.Font = new System.Drawing.Font("微软雅黑", 14);
             b.AutoSize = true;
             b.Click += new System.EventHandler(this.Button_dir);
+            b.BackColor = System.Drawing.Color.Khaki;
             this.Controls.Add(b);
             return b;
         }
@@ -101,16 +102,18 @@ namespace meaButton
             }
 
             int x = 0;
-
-            Button cDButton = new Button();
-            cDButton.Tag = "";
-            cDButton.Text = "打开文件夹";
-            cDButton.Font = new System.Drawing.Font("微软雅黑", 14);
-            cDButton.AutoSize = true;
-            cDButton.Click += new System.EventHandler(this.Button_dir);
-            this.Controls.Add(cDButton);
-            buttonList.Add(cDButton);
-
+            if (fileList.Count > 0)
+            {
+                Button cDButton = new Button();
+                cDButton.Tag = "";
+                cDButton.Text = "打开文件夹";
+                cDButton.Font = new System.Drawing.Font("微软雅黑", 14);
+                cDButton.AutoSize = true;
+                cDButton.Click += new System.EventHandler(this.Button_dir);
+                cDButton.BackColor = System.Drawing.Color.Khaki;
+                this.Controls.Add(cDButton);
+                buttonList.Add(cDButton);
+            }
             #region 确定当前目录的mp3的按钮的坐标
             for (int i = 0; i < fileList.Count; i++)
             {
