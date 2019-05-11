@@ -29,12 +29,12 @@ namespace meaButton
 		#region buttonFactory
 		private Button ButtonFactory(string FileName,string DirName)
 		{
-			if (FileName.Equals("打开文件夹"))
-			{
-				FileName = "";
-			}
 			Button b = new Button();
 			b.Tag = DirName + "\\" + FileName + ".mp3";
+			if (DirName.Equals("打开文件夹"))
+			{
+				b.Tag = FileName + ".mp3";
+			}
 			b.Text = FileName;
 			b.Font = new System.Drawing.Font("微软雅黑", 14);
 			b.AutoSize = true;
