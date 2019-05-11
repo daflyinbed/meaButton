@@ -34,5 +34,10 @@ namespace meaButton
             psi.Arguments = "/e," + Path;
             System.Diagnostics.Process.Start(psi);
         }
-    }
+		private void MyFromResize(object sender,EventArgs e)
+		{
+			buildUI();
+		}
+
+	}
 }
