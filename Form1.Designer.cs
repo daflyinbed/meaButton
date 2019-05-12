@@ -11,7 +11,10 @@ namespace meaButton
 		/// 必需的设计器变量。
 		/// </summary>
 		private System.ComponentModel.IContainer components = null;
-
+		private List<string> fileList = new List<string>();
+		private List<string> DirList = new List<string>();
+		private List<List<string>> fIDList = new List<List<string>>();
+		private DirectoryInfo folder = new DirectoryInfo(Application.StartupPath);
 		/// <summary>
 		/// 清理所有正在使用的资源。
 		/// </summary>
@@ -61,29 +64,28 @@ namespace meaButton
 			this.Controls.Clear();
 			//获取文件
 			//string[] files = Directory.GetFiles(Application.StartupPath, "*.mp3");
-			List<string> fileList = new List<string>();
-			List<string> DirList = new List<string>();
-			List<List<string>> fIDList = new List<List<string>>();
+
 			List<Button> buttonList = new List<Button>();
 			List<Button> folderButtonList = new List<Button>();
-			DirectoryInfo folder = new DirectoryInfo(Application.StartupPath);
-
-			foreach (FileInfo f in folder.GetFiles("*.mp3"))
+			if (fileList.Count == 0 && fIDList.Count == 0 && DirList.Count == 0)
 			{
-				//Console.WriteLine(f.Name.Split('.')[0]);
-				fileList.Add(f.Name.Split('.')[0]);
-			}
-			fIDList.Add(fileList);
-			DirList.Add("打开文件夹");
-			foreach (DirectoryInfo di in folder.GetDirectories())
-			{
-				DirList.Add(di.Name);
-				List<string> temp = new List<string>();
-				foreach (FileInfo f in di.GetFiles("*.mp3"))
+				foreach (FileInfo f in folder.GetFiles("*.mp3"))
 				{
-					temp.Add(f.Name.Split('.')[0]);
+					//Console.WriteLine(f.Name.Split('.')[0]);
+					fileList.Add(f.Name.Split('.')[0]);
 				}
-				fIDList.Add(temp);
+				fIDList.Add(fileList);
+				DirList.Add("打开文件夹");
+				foreach (DirectoryInfo di in folder.GetDirectories())
+				{
+					DirList.Add(di.Name);
+					List<string> temp = new List<string>();
+					foreach (FileInfo f in di.GetFiles("*.mp3"))
+					{
+						temp.Add(f.Name.Split('.')[0]);
+					}
+					fIDList.Add(temp);
+				}
 			}
 			const int offsetX = 0;
 			const int offsetY = 0;
@@ -110,6 +112,7 @@ namespace meaButton
 				{
 					Button b = ButtonFactory(fIDList[i][j], DirList[i]);
 					pre = buttonList[buttonList.Count - 1];
+					/*
 					if (pre.Left + pre.Size.Width + 10 + b.Width > this.ClientSize.Width)//换行
 					{
 						x = maxDirLength + 10 + offsetX;
@@ -118,13 +121,14 @@ namespace meaButton
 					}
 					else
 					{
+					*/
 						x = pre.Left + pre.Size.Width + 10;
 						if (x < maxDirLength + 10 + offsetX)
 						{
 							x = maxDirLength + 10 + offsetX;
 						}
 						//Console.WriteLine(x + "," + y);
-					}
+					//}
 					b.Location = P(x, y);
 					buttonList.Add(b);
 				}
@@ -149,8 +153,9 @@ namespace meaButton
 			this.Name = "Form1";
 			this.Text = "Form1";
 			this.ResumeLayout(false);
-			this.ResizeEnd += new System.EventHandler(this.MyFromResize);
+			//this.ResizeEnd += new System.EventHandler(this.MyFromResize);
 			buildUI();
+			this.AutoScroll = true;
 		}
 	}
 }
