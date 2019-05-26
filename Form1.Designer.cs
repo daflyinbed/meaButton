@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -69,13 +70,16 @@ namespace meaButton
 			List<Button> folderButtonList = new List<Button>();
 			if (fileList.Count == 0 && fIDList.Count == 0 && DirList.Count == 0)
 			{
-				foreach (FileInfo f in folder.GetFiles("*.mp3"))
+				if (folder.GetFiles("*mp3").Length != 0)
 				{
-					//Console.WriteLine(f.Name.Split('.')[0]);
-					fileList.Add(f.Name.Split('.')[0]);
+					foreach (FileInfo f in folder.GetFiles("*.mp3"))
+					{
+						//Console.WriteLine(f.Name.Split('.')[0]);
+						fileList.Add(f.Name.Split('.')[0]);
+					}
+					fIDList.Add(fileList);
+					DirList.Add("打开文件夹");
 				}
-				fIDList.Add(fileList);
-				DirList.Add("打开文件夹");
 				foreach (DirectoryInfo di in folder.GetDirectories())
 				{
 					DirList.Add(di.Name);
@@ -87,12 +91,17 @@ namespace meaButton
 					fIDList.Add(temp);
 				}
 			}
+			PictureBox title = new PictureBox();
+			Image imageFile = Image.FromFile("神楽めあ.png");
+			title.BackgroundImage = imageFile;
+			title.Width = imageFile.Width;
+			title.Height = imageFile.Height;
+			this.Controls.Add(title);
 			const int offsetX = 0;
-			const int offsetY = 0;
+			const int offsetY = 10;
 			int x = 0 + offsetX;
-			int y = 0 + offsetY;
+			int y = imageFile.Height + offsetY;
 			int maxDirLength = 0;
-
 			foreach (string dirName in DirList)
 			{
 				Button dirbutton = DirButtonFactory(dirName);
@@ -136,7 +145,6 @@ namespace meaButton
 				y = pre.Top + pre.Size.Height + 10;
 			}
 		}
-
 		private System.Drawing.Point P(int x,int y)
 		{
 			return new System.Drawing.Point(x, y);
