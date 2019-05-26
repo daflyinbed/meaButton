@@ -50,6 +50,10 @@ namespace meaButton
 		{
 			Button b = new Button();
 			b.Tag = "\\" + DirName;
+			if (DirName.Equals("打开文件夹"))
+			{
+				b.Tag = "";
+			}
 			b.Text = DirName;
 			b.Font = new System.Drawing.Font("微软雅黑", 14);
 			b.AutoSize = true;
@@ -96,6 +100,7 @@ namespace meaButton
 			title.BackgroundImage = imageFile;
 			title.Width = imageFile.Width;
 			title.Height = imageFile.Height;
+			title.Click += new System.EventHandler(this.OnClickPic);
 			this.Controls.Add(title);
 			const int offsetX = 0;
 			const int offsetY = 10;
