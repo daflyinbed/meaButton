@@ -126,7 +126,7 @@ namespace meaButton
 				{
 					Button b = ButtonFactory(fIDList[i][j], DirList[i]);
 					pre = buttonList[buttonList.Count - 1];
-					/*
+					
 					if (pre.Left + pre.Size.Width + 10 + b.Width > this.ClientSize.Width)//换行
 					{
 						x = maxDirLength + 10 + offsetX;
@@ -135,14 +135,14 @@ namespace meaButton
 					}
 					else
 					{
-					*/
+					
 						x = pre.Left + pre.Size.Width + 10;
 						if (x < maxDirLength + 10 + offsetX)
 						{
 							x = maxDirLength + 10 + offsetX;
 						}
 						//Console.WriteLine(x + "," + y);
-					//}
+					}
 					b.Location = P(x, y);
 					buttonList.Add(b);
 				}
