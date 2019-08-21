@@ -61,7 +61,7 @@ namespace meaButton
 
             mPlaying = 1,
 
-            mPuase = 2,
+            mPause = 2,
 
             mStop = 3
 
