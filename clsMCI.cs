@@ -191,7 +191,7 @@ namespace meaButton
 
 
 
-        public void Puase()
+        public void Pause()
 
         {
 
@@ -201,7 +201,7 @@ namespace meaButton
 
             ilong = APIClass.mciSendString("pause media", TemStr, TemStr.Length, 0);
 
-            mc.state = State.mPuase;
+            mc.state = State.mPause;
 
         }
 
